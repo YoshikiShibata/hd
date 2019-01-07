@@ -36,6 +36,6 @@ func TurnOnTrailing0s(x int) int {
 
 // Signle1BitAtRightMost0Bit creates a word with a single 1-bit at the position
 // of the rightmost 0-bit in x, producing 0 if none (e.g., 10100111 ⇒ 00001000).
-func Single1BitAtRightMost0Bit(int x) int {
+func Single1BitAtRightMost0Bit(x int) int {
 	return (x + 1) &^ x
 }

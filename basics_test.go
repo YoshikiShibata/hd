@@ -102,3 +102,19 @@ func TestTurnOnTrailing0s(t *testing.T) {
 		}
 	}
 }
+
+func TestSingle1BitAtRightMost0Bit(t *testing.T) {
+	for _, test := range []struct {
+		x        int
+		expected int
+	}{
+		{-1, 0},
+		{0xFF00, 1},
+		{0xFF01, 2},
+	} {
+		r := Single1BitAtRightMost0Bit(test.x)
+		if r != test.expected {
+			t.Errorf("%x: result is %x, but want %x", test.x, r, test.expected)
+		}
+	}
+}
