@@ -118,3 +118,19 @@ func TestSingle1BitAtRightMost0Bit(t *testing.T) {
 		}
 	}
 }
+
+func TestSingle0BitAtRightMost1Bit(t *testing.T) {
+	for _, test := range []struct {
+		x        int
+		expected int
+	}{
+		{0, -1}, // all 1's if none
+		{1, -2},
+		{0xA8, -1 &^ (1 << 3)},
+	} {
+		r := Single0BitAtRightMost1Bit(test.x)
+		if r != test.expected {
+			t.Errorf("%x: result is %x, but want %x", test.x, r, test.expected)
+		}
+	}
+}
