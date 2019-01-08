@@ -40,9 +40,30 @@ func Single1BitAtRightMost0Bit(x int) int {
 	return (x + 1) &^ x
 }
 
-// Single0BitAtRightMost1Bit creates create a word with a single 0-bit at the
+// Single0BitAtRightMost1Bit creates a word with a single 0-bit at the
 // position of the rightmost 1-bit in x, producing all 1’s if none
 // (e.g., 10101000 ⇒ 11110111):
 func Single0BitAtRightMost1Bit(x int) int {
 	return ^x | (x - 1)
+}
+
+// ReplaceTrailing0sWith1sA creates a word with 1’s at the positions of the
+// trailing 0’s in x, and 0’s elsewhere, producing 0 if none
+// (e.g., 01011000 ⇒ 00000111)
+func ReplaceTrailing0sWith1sA(x int) int {
+	return ^x & (x - 1)
+}
+
+// ReplaceTrailing0sWith1sB creates a word with 1’s at the positions of the
+// trailing 0’s in x, and 0’s elsewhere, producing 0 if none
+// (e.g., 01011000 ⇒ 00000111)
+func ReplaceTrailing0sWith1sB(x int) int {
+	return ^(x | -x)
+}
+
+// ReplaceTrailing0sWith1sC creates a word with 1’s at the positions of the
+// trailing 0’s in x, and 0’s elsewhere, producing 0 if none
+// (e.g., 01011000 ⇒ 00000111)
+func ReplaceTrailing0sWith1sC(x int) int {
+	return (x & -x) - 1
 }

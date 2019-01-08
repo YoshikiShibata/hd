@@ -134,3 +134,55 @@ func TestSingle0BitAtRightMost1Bit(t *testing.T) {
 		}
 	}
 }
+
+func TestReplaceTrailing0sWith1s(t *testing.T) {
+	for _, test := range []struct {
+		x        int
+		expected int
+	}{
+		{-1, 0},
+		{0x58, 0x7},
+		{0, -1},
+	} {
+		r := ReplaceTrailing0sWith1sA(test.x)
+		if r != test.expected {
+			t.Errorf("%x: result is %x, but want %x", test.x, r, test.expected)
+		}
+
+		r = ReplaceTrailing0sWith1sB(test.x)
+		if r != test.expected {
+			t.Errorf("%x: result is %x, but want %x", test.x, r, test.expected)
+		}
+
+		r = ReplaceTrailing0sWith1sC(test.x)
+		if r != test.expected {
+			t.Errorf("%x: result is %x, but want %x", test.x, r, test.expected)
+		}
+	}
+}
+
+var finalResult int
+
+func BenchmarkReplaceTrailing0sWith1sA(b *testing.B) {
+	var result int
+	for i := 0; i < b.N; i++ {
+		result += ReplaceTrailing0sWith1sA(i)
+	}
+	finalResult = result
+}
+
+func BenchmarkReplaceTrailing0sWith1sB(b *testing.B) {
+	var result int
+	for i := 0; i < b.N; i++ {
+		result += ReplaceTrailing0sWith1sB(i)
+	}
+	finalResult = result
+}
+
+func BenchmarkReplaceTrailing0sWith1sC(b *testing.B) {
+	var result int
+	for i := 0; i < b.N; i++ {
+		result += ReplaceTrailing0sWith1sC(i)
+	}
+	finalResult = result
+}
