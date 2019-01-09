@@ -67,3 +67,10 @@ func ReplaceTrailing0sWith1sB(x int) int {
 func ReplaceTrailing0sWith1sC(x int) int {
 	return (x & -x) - 1
 }
+
+// ReplaceTrailing1sWith0s creates a word with 0’s at the positions of the
+// trailing 1’s in x, and 1’s elsewhere, producing all 1’s if none
+// (e.g., 10100111 ⇒ 11111000):
+func ReplaceTrailing1sWith0s(x int) int {
+	return ^x | (x + 1)
+}

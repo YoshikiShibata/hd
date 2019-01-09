@@ -75,8 +75,8 @@ func TestTurnOffTrailing1s(t *testing.T) {
 		{-1, 0},
 		{1, 0},
 		{0xFF, 0},
-		{0xFFFF00FF, 0xFFFF0000},
-		{0xFF00FFFF, 0xFF000000},
+		{0x0FFF00FF, 0x0FFF0000},
+		{0x0F00FFFF, 0x0F000000},
 	} {
 		r := TurnOffTrailing1s(test.x)
 		if r != test.expected {
@@ -185,4 +185,21 @@ func BenchmarkReplaceTrailing0sWith1sC(b *testing.B) {
 		result += ReplaceTrailing0sWith1sC(i)
 	}
 	finalResult = result
+}
+
+func TestReplaceTrailing1sWith0s(t *testing.T) {
+	for _, test := range []struct {
+		x        int
+		expected int
+	}{
+		{0, -1}, // all 1's if none
+		{0xA7, -8},
+		{0x0F000007, -8},
+		{0x7FFFFFFD, -2},
+	} {
+		r := ReplaceTrailing1sWith0s(test.x)
+		if r != test.expected {
+			t.Errorf("%x: result is %x, but want %x", test.x, r, test.expected)
+		}
+	}
 }
