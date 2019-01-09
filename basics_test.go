@@ -235,3 +235,19 @@ func TestReplaceRightMost1BitAndTrailing0sWith1s(t *testing.T) {
 		}
 	}
 }
+
+func TestReplaceRightMost0BitAndTrailing1sWith0s(t *testing.T) {
+	for _, test := range []struct {
+		x        int
+		expected int
+	}{
+		{-1, -1}, // all 1's if no 0-bit
+		{0, 1},   // the integer 1 if no trailing 1's
+		{0x57, 0x0F},
+	} {
+		r := ReplaceRightMost0BitAndTrailing1sWith0s(test.x)
+		if r != test.expected {
+			t.Errorf("%x: result is %x, but want %x", test.x, r, test.expected)
+		}
+	}
+}

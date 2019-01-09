@@ -88,3 +88,11 @@ func IsolateRightMost1Bit(x int) int {
 func ReplaceRightMost1BitAndTrailing0sWith1s(x int) int {
 	return x ^ (x - 1)
 }
+
+// ReplaceRightMost0BitAndTrailing1sWith0s creates a word with 1’s at the
+// positions of the rightmost 0-bit and the trailing 1’s in x, producing all
+// 1’s if no 0-bit, and the integer 1 if no trailing 1’s
+// (e.g., 01010111 ⇒ 00001111):
+func ReplaceRightMost0BitAndTrailing1sWith0s(x int) int {
+	return x ^ (x + 1)
+}
