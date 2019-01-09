@@ -203,3 +203,19 @@ func TestReplaceTrailing1sWith0s(t *testing.T) {
 		}
 	}
 }
+
+func TestIsolateRightMost1Bit(t *testing.T) {
+	for _, test := range []struct {
+		x        int
+		expected int
+	}{
+		{0, 0}, // 0 if none
+		{0x58, 0x08},
+		{0x70000000, 0x10000000},
+	} {
+		r := IsolateRightMost1Bit(test.x)
+		if r != test.expected {
+			t.Errorf("%x: result is %x, but want %x", test.x, r, test.expected)
+		}
+	}
+}

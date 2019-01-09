@@ -74,3 +74,9 @@ func ReplaceTrailing0sWith1sC(x int) int {
 func ReplaceTrailing1sWith0s(x int) int {
 	return ^x | (x + 1)
 }
+
+// IsolateRightMost1Bit isolates the rightmost 1-bit, producing 0 if none
+// (e.g., 01011000 ⇒ 00001000):
+func IsolateRightMost1Bit(x int) int {
+	return x & (-x)
+}
