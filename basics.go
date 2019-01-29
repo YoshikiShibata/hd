@@ -96,3 +96,15 @@ func ReplaceRightMost1BitAndTrailing0sWith1s(x int) int {
 func ReplaceRightMost0BitAndTrailing1sWith0s(x int) int {
 	return x ^ (x + 1)
 }
+
+// TurnOffRightMostContinousStringOf1s turn off the rightmost contiguous
+// string of 1’s (e.g., 01011100 ==> 01000000)
+func TurnOffRightMostContinousStringOf1s(x int) int {
+	return ((x | (x - 1)) + 1) & x
+}
+
+// TurnOffRightMostContinousStringOf1s turn off the rightmost contiguous
+// string of 1’s (e.g., 01011100 ==> 01000000)
+func TurnOffRightMostContinousStringOf1sAnother(x int) int {
+	return ((x & -x) + x) & x
+}

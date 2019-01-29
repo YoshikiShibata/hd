@@ -251,3 +251,51 @@ func TestReplaceRightMost0BitAndTrailing1sWith0s(t *testing.T) {
 		}
 	}
 }
+
+func TestTurnOffRightMostContinousStringOf1s(t *testing.T) {
+	for _, test := range []struct {
+		x        int
+		expected int
+	}{
+		{0x5C, 0x40},
+		{1<<4 - 1<<2, 0},
+		{1<<15 - 1<<10, 0},
+	} {
+		r := TurnOffRightMostContinousStringOf1s(test.x)
+		if r != test.expected {
+			t.Errorf("%x: result is %x, but want %x", test.x, r, test.expected)
+		}
+	}
+}
+
+func TestTurnOffRightMostContinousStringOf1sAnother(t *testing.T) {
+	for _, test := range []struct {
+		x        int
+		expected int
+	}{
+		{0x5C, 0x40},
+		{1<<4 - 1<<2, 0},
+		{1<<15 - 1<<10, 0},
+	} {
+		r := TurnOffRightMostContinousStringOf1sAnother(test.x)
+		if r != test.expected {
+			t.Errorf("%x: result is %x, but want %x", test.x, r, test.expected)
+		}
+	}
+}
+
+func BenchmarkTurnOffRightMostContinousStringOf1s(b *testing.B) {
+	var result int
+	for i := 0; i < b.N; i++ {
+		result += TurnOffRightMostContinousStringOf1s(i)
+	}
+	finalResult = result
+}
+
+func BenchmarkTurnOffRightMostContinousStringOf1sAnother(b *testing.B) {
+	var result int
+	for i := 0; i < b.N; i++ {
+		result += TurnOffRightMostContinousStringOf1sAnother(i)
+	}
+	finalResult = result
+}
